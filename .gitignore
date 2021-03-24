@@ -32,3 +32,5 @@ packages/
 
 venv/
 .idea/
+__pycache__/
+migrations/__pycache/
