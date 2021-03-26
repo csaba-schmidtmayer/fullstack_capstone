@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 
 from models import setup_db, db, Movie, Actor
+from auth import AuthError, requires_auth
 
 PAGE_LENGTH = 10
 
@@ -29,6 +30,7 @@ def create_app(test_config=None):
     # MOVIES
 
     @app.route('/movies')
+    @requires_auth('get:movies')
     def get_paginated_movies():
         page = request.args.get('page', 1, type=int)
         movies = Movie.query.order_by('release_date').all()
@@ -46,6 +48,7 @@ def create_app(test_config=None):
             abort(404, 'The requested page is beyond the valid range.')
 
     @app.route('/movies/<int:movie_id>')
+    @requires_auth('get:movies')
     def get_specific_movie(movie_id):
         movie = Movie.query.get(movie_id)
         if movie is not None:
@@ -57,6 +60,7 @@ def create_app(test_config=None):
             abort(404, f'Movie with id {movie_id} does not exist.')
 
     @app.route('/movies', methods=['POST'])
+    @requires_auth('add:movies')
     def add_new_movie():
         success = True
 
@@ -93,6 +97,7 @@ def create_app(test_config=None):
             abort(500, 'Adding the movie to the database was unsuccessful.')
 
     @app.route('/movies/<int:movie_id>', methods=['PATCH'])
+    @requires_auth('modify:movies')
     def update_movie(movie_id):
         success = True
         upd_movie = Movie.query.get(movie_id)
@@ -128,6 +133,7 @@ def create_app(test_config=None):
             abort(500, err_msg)
 
     @app.route('/movies/<int:movie_id>', methods=['DELETE'])
+    @requires_auth('delete:movies')
     def delete_movie(movie_id):
         success = True
         del_movie = Movie.query.get(movie_id)
@@ -157,6 +163,7 @@ def create_app(test_config=None):
     # ACTORS
 
     @app.route('/actors')
+    @requires_auth('get:actors')
     def get_paginated_actors():
         page = request.args.get('page', 1, type=int)
         actors = Actor.query.order_by('id').all()
@@ -174,6 +181,7 @@ def create_app(test_config=None):
             abort(404, 'The requested page is beyond the valid range.')
 
     @app.route('/actors/<int:actor_id>')
+    @requires_auth('get:actors')
     def get_specific_actor(actor_id):
         actor = Actor.query.get(actor_id)
         if actor is not None:
@@ -185,6 +193,7 @@ def create_app(test_config=None):
             abort(404, f'Actor with id {actor_id} does not exist.')
 
     @app.route('/actors', methods=['POST'])
+    @requires_auth('add:actors')
     def add_new_actor():
         success = True
 
@@ -229,6 +238,7 @@ def create_app(test_config=None):
             abort(500, 'Adding the actor to the database was unsuccessful.')
 
     @app.route('/actors/<int:actor_id>', methods=['PATCH'])
+    @requires_auth('modify:actors')
     def update_actor(actor_id):
         success = True
         upd_actor = Actor.query.get(actor_id)
@@ -272,6 +282,7 @@ def create_app(test_config=None):
             abort(500, err_msg)
 
     @app.route('/actors/<int:actor_id>', methods=['DELETE'])
+    @requires_auth('delete:actors')
     def delete_actor(actor_id):
         success = True
         del_actor = Actor.query.get(actor_id)
