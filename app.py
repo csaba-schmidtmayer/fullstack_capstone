@@ -309,4 +309,46 @@ def create_app(test_config=None):
         else:
             abort(500, err_msg)
 
+    # ERROR HANDLING
+
+    @app.errorhandler(400)
+    def bad_request(error):
+        return jsonify({
+            'success': False,
+            'error': 400,
+            'message': error.description
+        }), 400
+
+    @app.errorhandler(404)
+    def not_found(error):
+        return jsonify({
+            'success': False,
+            'error': 404,
+            'message': error.description
+        }), 404
+
+    @app.errorhandler(409)
+    def conflict(error):
+        return jsonify({
+            'success': False,
+            'error': 409,
+            'message': error.description
+        }), 409
+
+    @app.errorhandler(500)
+    def internal_error(error):
+        return jsonify({
+            'success': False,
+            'error': 500,
+            'message': error.description
+        }), 500
+
+    @app.errorhandler(AuthError)
+    def handle_auth_error(e):
+        return jsonify({
+            'success': False,
+            'error': e.status_code,
+            'message': e.error['description']
+        }), e.status_code
+
     return app
