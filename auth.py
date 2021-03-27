@@ -7,7 +7,7 @@ from urllib.request import urlopen
 
 AUTH0_DOMAIN = 'schmiczy.eu.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'https://api.casting_agency.schmiczy.eu'
+API_AUDIENCE = 'https://api.casting-agency.schmiczy.eu'
 
 
 class AuthError(Exception):
