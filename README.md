@@ -26,6 +26,10 @@ export FLASK_ENV=development
 flask run
 ```
 
+### Unit tests
+
+Run `tests.py` for unit tests. Unit tests evaluate API behavior with a user with all permissions. To test RBAC, use the test suite of the included Postman collection.
+
 ## Testing the API on Heroku
 
 The host address of the Heroku deployment is `https://casting-agency-schmiczy-eu.herokuapp.com`.
