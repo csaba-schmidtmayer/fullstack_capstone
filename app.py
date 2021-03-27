@@ -8,10 +8,9 @@ from auth import AuthError, requires_auth
 
 PAGE_LENGTH = 10
 
-app = Flask(__name__)
-
 
 def create_app(test_config=None):
+    app = Flask(__name__)
     setup_db(app)
 
     CORS(app)
