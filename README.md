@@ -241,6 +241,31 @@ Three roles are defined with the following permissions:
 | Casting director | `get:movies` `get:actors` `modify:movies` `modify:actors` `add:actors` `delete:actors` |
 | Executive producer | `get:movies` `get:actors` `modify:movies` `modify:actors` `add:movies` `add:actors` `delete:movies` `delete:actors` |
 
+Tokens can be requested by sending a POST message to `https://schmiczy.eu.auth0.com/oauth/token` with the following JSON payload:
+
+```json
+{
+    "client_id": "5eXy5EwbCL5jq2jQZYA2xPdygRVj5AsM",
+    "client_secret": "-ho1au3-CbB09VsjagzvXDHqBAkQqNFadD4VcKRPZ0qPhAAGLh_C3MWB353MIzfA",
+    "audience": "https://api.casting-agency.schmiczy.eu",
+    "grant_type": "password",
+    "username": <username>,
+    "password": <password>
+}
+```
+
+The following username and password pairs can be used for the roles defined above:
+
+| Role | Username | Password |
+| --- | --- | --- |
+| Casting assistant | assistant@example.com | Assistant! |
+| Casting director | director@example.com | Director! |
+| Executive producer | producer@example.com | Producer! |
+
+The tokens recieved this way must be included in the `Authorization` header of a request sent towards the API endpoints.
+
+The token requests are included in the attached Postman collection as request templates. To use them, simply choose one under its respective role folder, and click `Send`.
+
 ## Testing
 
 A Postman collection is included with the project: `Fullstack Capstone.postman_collection.json`. After importing the collection to Postman, the test suite can be run on a fresh database created from the backup file.
