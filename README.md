@@ -277,3 +277,7 @@ A Postman collection is included with the project: `Fullstack Capstone.postman_c
 The test suite is divided into three folders based on the RBAC roles of the project. Each folder contains a token request, which can be used to request a new bearer token if the one included in the collection has expired. Click `Send`, then copy the token returned in the payload, and paste it under the `Authorization` tab of the folder. Note that each folder requires a token specific to the corresponding role.
 
 By changing the `url` variable on the collection level to the [Heroku URL](#testing-the-api-on-heroku), you can use the requests to communicate with the deployed application.
+
+## Credits
+
+The authentication token retreival code for unit tests are from [this Stackoverflow post](https://stackoverflow.com/questions/48552474/auth0-obtain-access-token-for-unit-tests-in-python).
