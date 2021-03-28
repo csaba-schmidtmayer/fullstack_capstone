@@ -2,6 +2,9 @@
 
 This repository is the project code for the final capstone project of the Udacity Fullstack Nanodegree. It follows the default specification for creating a management interface for a casting agency.
 
+The project demonstrates a backend through which coworkers of a casting agency with different authority levels can keep an up-to-date inventory of actors and movies. Since this project is a backend only, it must be interacted with by command line (curl) or tools like [Postman](https://www.postman.com).
+
+
 ## Testing the API locally
 
 ### Installing Python Dependencies
