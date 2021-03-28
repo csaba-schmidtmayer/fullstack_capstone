@@ -1,6 +1,6 @@
 # Casting Agency Fullstack Capstone Project
 
-This repository is the project code for the final capstone project of the Udacity Fullstack Nanodegree. It follows the default specification for creating a management interface for a casting agency. The
+This repository is the project code for the final capstone project of the Udacity Fullstack Nanodegree. It follows the default specification for creating a management interface for a casting agency.
 
 ## Testing the API locally
 
