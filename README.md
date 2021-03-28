@@ -1,5 +1,7 @@
 # Casting Agency Fullstack Capstone Project
 
+This repository is the project code for the final capstone project of the Udacity Fullstack Nanodegree. It follows the default specification for creating a management interface for a casting agency. The
+
 ## Testing the API locally
 
 ### Installing Python Dependencies
@@ -7,28 +9,71 @@
 Navigate to the fullstack_capstone folder and install python package dependencies by running:
 
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 This will install all of the required packages within the `requirements.txt` file.
 
+#### Key dependencies
+
+**Flask:** The web framework for handling requests and responses.
+**SQLAlchemy:** ORM tool for handling database connections and queries.
+**Flask-Jose:** A toolkit for decoding Javascript Web Tokens for authorization.
+
 ### Database Setup
 
-The `db_backup.sql` file can be used to restore a backup of the test database.
+Create a PostgreSQL database with the name `casting_agency`. Use the `db_backup.sql` file to restore a backup of the test database.
 
-### Running the server
+You can also set up the database structure by using the included migrations by running the following commands:
 
-To run the server, execute:
+```bash
+flask db init
+flask db migrate
+flask db upgrade
+```
+
+In this case, you have to populate the database manually to perform any tests. Make sure to add at least two entries for each category, as ids 1 and 2 for both movies and actors are required for all tests to pass.
+
+### Setting up and running the local development server
+
+To run the development server, execute one of the following command stacks, depending on your operating system:
+
+On Linux:
 
 ```bash
 export FLASK_APP=app
 export FLASK_ENV=development
+
+export AUTH0_DOMAIN=schmiczy.eu.auth0.com
+export ALGORITHMS=RS256
+export API_AUDIENCE=https://api.casting-agency.schmiczy.eu
+
 flask run
 ```
 
+On Windows:
+
+```bash
+set FLASK_APP=app
+set FLASK_ENV=development
+
+set AUTH0_DOMAIN=schmiczy.eu.auth0.com
+set ALGORITHMS=RS256
+set API_AUDIENCE=https://api.casting-agency.schmiczy.eu
+
+flask run
+```
+
+For convenience, you can also run either `local_setup.sh` or `local_setup.bat`.
+
 ### Unit tests
 
-Run `tests.py` for unit tests. Unit tests evaluate API behavior with a user with all permissions. To test RBAC, use the test suite of the included Postman collection.
+Run `tests.py` for unit tests.
+
+Two TestCase classes are included:
+
+**ApiTestCase:** Uses an executive producer role to test that all endpoints are working correctly.
+**RoleTestCase:** Tests that a representative selection of endpoints (GET /movies, POST /actors, POST /movies) can be accessed with the correct roles only.
 
 ## Testing the API on Heroku
 
@@ -270,7 +315,7 @@ The tokens recieved this way must be included in the `Authorization` header of a
 
 The token requests are included in the attached Postman collection as request templates. To use them, simply choose one under its respective role folder, and click `Send`.
 
-## Testing
+## Postman collection
 
 A Postman collection is included with the project: `Fullstack Capstone.postman_collection.json`. After importing the collection to Postman, the test suite can be run on a fresh database created from the backup file.
 
